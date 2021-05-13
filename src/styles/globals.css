@@ -1,0 +1,31 @@
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: Poppins, sans-serif;
+  width: 100vw;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* Variaveis para CSS */
+:root{
+  --white          : #fff;
+  --background     : #f2f3f5;
+  --text           : #6C6C80;
+  --title          : #3D3D4D;
+  --red            : #C72828;
+  --true           : #39B100;
+  --false          : #C72828;
+  --card           : #F0F0F5;
+  --footer-card    : #E4E4EB;
+  --inputs         : #B7B7CC;
+  --yellow         : #FFB84D;
+}

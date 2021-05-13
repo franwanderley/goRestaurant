@@ -1,0 +1,82 @@
+
+.container{
+   display: flex;
+   width: 100%;
+   flex-direction: row;
+   justify-content: space-between;
+   background-color: var(--red);
+   padding: 3% 3%;
+   padding-bottom: 10%;
+}
+.heading{
+   display: flex;
+   flex-direction: row;
+   justify-content: space-evenly;
+   align-items: flex-start;
+}
+.heading img{
+   width: 64px;
+   height: 64px;
+   margin-right: 2%;
+}
+.heading h1{
+   font-size: 1.60rem;
+   line-height: 1.60rem;
+   color: var(--white);
+   margin: 0%;
+   margin-top: 5%;
+}
+.heading div{
+   display: flex;
+   flex-direction: row;
+   align-items: flex-start;
+   justify-content: flex-start;
+}
+.heading p{
+   font-size: 1rem;
+   color: var(--white);
+   font-weight: 400;
+}
+
+.options{
+   display: flex;
+   flex-direction: column;
+   align-items: flex-start;
+   margin-right: 15px;
+}
+.options > button{
+   padding: 0;
+   padding-right: 5%;
+   display: flex;
+   flex-direction: row;
+   align-items: center;
+   justify-content: space-around;
+   border-radius: 8px;
+   color: var(--white);
+   border: none;
+   cursor: pointer;
+   transition: .2s filter;
+}
+.options > button:hover{
+   filter: opacity(.9);
+}
+.options .textbutton{
+   padding: 10%;
+   display: flex;
+   background: var(--true);
+   flex: 1;
+   white-space: nowrap;
+   font-size: 16px;
+   font-weight: 600;
+   line-height: 24px;
+}
+.options .iconbutton{
+   padding: 9%;
+   display: flex;
+   align-items: center;
+   background: #41C900;
+   flex: 1;
+   font-size: 1.2rem;
+   height: 100%;
+
+}

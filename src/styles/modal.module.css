@@ -1,0 +1,129 @@
+.overlay {
+   background:rgba(0, 0, 0, 0.9);
+   z-index: 10;
+   position: fixed;
+   top: 0;
+   bottom: 0;
+   left: 0;
+   right: 0;
+   display: flex;
+   justify-content:center;
+   align-items: center;
+}
+.container{
+   background: var(--card);
+   width: 100%;
+   max-width: 400px;
+   padding : 2rem;
+   border-radius: 5px;
+   box-shadow: 0 0 60px rgba(0, 0, 0, .05);
+   text-align: center;
+   position: relative;
+}
+.container h3{
+   font-size: 20px;
+   font-weight: 600;
+   text-align: left;
+   color: var(--title);
+}
+.form{
+   display: flex;
+   flex-direction: column;
+   align-items: flex-start;
+   width: 100%;
+}
+.form label{
+   font-size: 12px;
+   text-align: left;
+   margin-bottom: .5%;
+   color: var(--text);
+}
+.form input{
+   width: 100%;
+}
+.form input{
+   padding: 10px 5px;
+   border: 1px solid var(--white);
+   color: var(--text);
+   font-size: 13px;
+   outline: 1px solid var(--footer-card);
+   margin-bottom: 5%;
+}
+.form .juntos{
+   display: flex;
+   flex-direction: row;
+   align-items: center;
+   justify-content: space-between;
+}
+.juntos .divnome{
+   display: flex;
+   flex-direction: column;
+   align-items: flex-start;
+   
+}
+.juntos .divpreco{
+   display: flex;
+   flex-direction: column;
+   align-items: flex-start;
+   width: 30%;
+}
+
+.form .descricao{
+   padding: 10px 5px;
+   border: 1px solid var(--white);
+   color: var(--text);
+   font-size: 13px;
+   outline: 1px solid var(--footer-card);
+   width: 100%;
+   margin-bottom: 5%;
+   resize: none;
+}
+.form button{
+   padding: 0;
+   margin-top: 5%;
+   border-radius: 8px;
+   display: flex;
+   flex-direction: row;
+   align-items: center;
+   align-self: flex-end;
+   justify-content: space-around;
+   color: var(--white);
+   border: none;
+   cursor: pointer;
+   transition: .2s filter;
+}
+.form button:hover{
+   filter: opacity(.9);
+}
+.form .textbutton{
+   padding: 5%;
+   display: flex;
+   background: var(--true);
+   white-space: nowrap;
+   font-size: 16px;
+   font-weight: 500;
+   line-height: 24px;
+}
+.form .iconbutton{
+   padding: 6%;
+   display: flex;
+   align-items: center;
+   background: #41C900;
+   font-size: 21.5px;
+   height: 100%;
+
+}
+.btnclose{
+   position: absolute;
+   top: 2%;
+   right: 2%;
+   font-size: 25px;
+   font-weight: 600;
+   border: none;
+   cursor: pointer;
+   color: var(--title);
+   transition: .2s color;
+}
+.btnclose:hover{
+   color: #000;
+}
