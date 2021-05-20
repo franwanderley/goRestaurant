@@ -1,34 +1,48 @@
 import { FormEvent, useContext, useState } from 'react';
 import { FiCheckSquare, FiX } from 'react-icons/fi';
+import Swal from 'sweetalert2';
 import { Plates, PlatesContext} from '../providers/PlatesContext';
 import styles from '../styles/modal.module.css';
 
 export function Modal(){
-   const {closeModal, addPlates} = useContext(PlatesContext);
-   const [imagem, setImagem] = useState<string>();
-   const [nome, setNome] = useState<string>();
-   const [preco, setPreco] = useState<number>();
-   const [descricao, setDescricao] = useState<string>();
+   const {
+      closeModal, isOpenModal, plateEdit, changePlateEdit,editPlates, addPlates
+   } = useContext(PlatesContext);
+   const [imagem, setImagem] = useState(plateEdit?.image || '');
+   const [nome, setNome] = useState(plateEdit?.title || '');
+   const [preco, setPreco] = useState<number>(plateEdit && Number(plateEdit.price));
+   const [descricao, setDescricao] = useState(plateEdit?.description || '');
 
    function handleSubmit(form : FormEvent){
       form.preventDefault();
       closeModal();
+      changePlateEdit(undefined);
       const plate = {
-         imagem,
-         titulo: nome,
-         preco: preco.toLocaleString(), 
-         descricao, 
+         image: imagem,
+         title: nome,
+         price: preco.toLocaleString(), 
+         description: descricao, 
          isAvaliable: true
       } as Plates;
-      addPlates(plate);
+      if(plateEdit){
+         editPlates(plate);
+         Swal.fire('Plato Editado com Sucesso', '', 'success');
+      }else{
+         addPlates(plate);
+         Swal.fire('Plato Salvo com Sucesso', '', 'success');
+      }
    }
 
-   return (
+   function handleCloseModal(){
+      closeModal();
+      changePlateEdit(undefined);
+   }
+   if(isOpenModal) return (
       <div className={styles.overlay}>
          <div className={styles.container}>
             <button
                className={styles.btnclose}
-               onClick={() => closeModal()}
+               onClick={handleCloseModal}
             >
                <FiX/>
             </button>
@@ -38,7 +52,8 @@ export function Modal(){
                   <label htmlFor="url">URL da imagem</label>
                   <input 
                      type="text" id="uri"
-                     required 
+                     required
+                     value={imagem} 
                      placeholder="Cole o link aqui"
                      onChange={e => setImagem(e.target.value)}
                   />
@@ -46,7 +61,8 @@ export function Modal(){
                      <div className={styles.divnome}>
                         <label htmlFor="nome">Nome do Prato</label>
                         <input 
-                           type="text" id="nome" 
+                           type="text" id="nome"
+                           value={nome} 
                            required 
                            placeholder="Ex: Moda Italiana"
                            onChange={e => setNome(e.target.value)}
@@ -56,7 +72,8 @@ export function Modal(){
                         <label htmlFor="preco">Preço</label>
                         <input 
                            type="number"
-                           required 
+                           required
+                           value={preco} 
                            id="preco"
                            onChange={e => setPreco(Number(e.target.value))}
                            />
@@ -65,6 +82,7 @@ export function Modal(){
                   <label htmlFor="descricao">Descrição</label>
                   <textarea 
                      className={styles.descricao}
+                     value={descricao}
                      required id="descricao" 
                      onChange={e => setDescricao(e.target.value)}
                   />
@@ -80,5 +98,8 @@ export function Modal(){
             </form>
          </div>
       </div>
+   );
+   else return (
+      <div style={{display: 'none'}}></div>
    );
 }

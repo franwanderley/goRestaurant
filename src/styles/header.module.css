@@ -5,7 +5,7 @@
    flex-direction: row;
    justify-content: space-between;
    background-color: var(--red);
-   padding: 3% 3%;
+   padding: 3% 5%;
    padding-bottom: 10%;
 }
 .heading{
@@ -79,4 +79,13 @@
    font-size: 1.2rem;
    height: 100%;
 
+}
+
+@media(max-width : 500px){
+   .container{
+      flex-direction: column;
+      align-items: center;
+      padding: 1%;
+      padding-bottom: 15%;
+   }
 }

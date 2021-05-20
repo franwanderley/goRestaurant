@@ -1,12 +1,13 @@
 .container {
-  min-height: 100vh;
+  height: 100vh;
+  width: 100%;
   display: flex;
   flex-direction: column;
-  height: 100vh;
 }
 
 .main {
-  padding: 5rem 0;
+  width: 100%;
+  padding: 5rem .5rem;
   position: absolute;
   top: 10%;
   display: flex;
@@ -15,4 +16,33 @@
   justify-content: space-evenly;
   align-items: center;
   flex-wrap: wrap;
+}
+
+.card{
+  width: 30%;
+}
+
+@media(max-width : 1080px){
+  .card{
+    width: 48%;
+  }
+}
+
+@media(max-width : 750px){
+  .card{
+    width: 80%;
+  }
+}
+@media(max-width: 500px){
+    .container{
+        width: 100%;
+    }
+    .main{
+      top: 12%;
+    }
+}
+@media(max-width: 290px){
+  .card{
+    width: 96%;
+  }
 }

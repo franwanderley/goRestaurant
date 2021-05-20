@@ -1,11 +1,9 @@
-import { ProductProvider } from '../providers/PlatesContext'
+import { PlatesProvider } from '../providers/PlatesContext'
 import '../styles/globals.css'
 
 function MyApp({ Component, pageProps }) {
   return (
-    <ProductProvider>
-      <Component {...pageProps} />
-    </ProductProvider>
+    <Component {...pageProps} />
   );
 }
 

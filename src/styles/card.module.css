@@ -5,13 +5,25 @@
    display: flex;
    flex-direction: column;
    background: var(--card);
-   margin-top: 10%;
+   margin-bottom: 8%;
+}
+.opacity{
+   /* opacity: .7; */
+   filter: grayscale(.5);
 }
 .image{
    background: var(--yellow);
-   padding: 4% 10%;
+   padding: 6% 10%;
+   display: flex;
+   justify-content: center;
    padding-bottom: 0;
    height: 100%;
+}
+.plates{
+   padding: 0;
+   margin: 0;
+   width: 80%;
+   height: 40%;
 }
 
 .details{
@@ -68,14 +80,15 @@
    filter: opacity(.6);
 }
 .divcheckbox{
-   width: 50%;
    display: flex;
    flex-direction: row;
    justify-content: space-evenly;
    align-items: center;
 }
+
 .divcheckbox input.disponivel[type = "checkbox"]{
    appearance: none;
+   margin-left: 2%;
    position: relative;
    background: var(--true);
    outline: none;
@@ -84,7 +97,18 @@
    width: 70px;
    height: 30px;
 }
-input.disponivel[type = "checkbox"]::before{
+input.indisponivel[type = "checkbox"]{
+   appearance: none;
+   margin-left: 2%;  
+   position: relative;
+   background: var(--false);
+   outline: none;
+   border-radius: 20px;
+   box-shadow: inset 0 0 5px rgba(0,0,0, .2);
+   width: 70px;
+   height: 30px;
+}
+.divcheckbox input[type = "checkbox"]::before{
    content : '';
    position: absolute;
    border-radius: 20px;
@@ -97,6 +121,12 @@ input.disponivel[type = "checkbox"]::before{
    transition: .5s;
    box-shadow: 0px 2px 5px rgba(0,0,0, .2);
 }
- input.disponivel:checked[type = "checkbox"]::before{
+.divcheckbox input:checked[type = "checkbox"]::before{
    left: 33px;
+}
+
+@media(max-width: 500px){
+   .footer{
+      padding: 2%;
+   }
 }

@@ -1,45 +1,44 @@
-import { useContext } from 'react';
-import { Card } from '../components/Card'
+import { useContext, useEffect } from 'react';
+import { GetStaticProps } from 'next';
 import { Header } from '../components/Header'
 import { Modal } from '../components/Modal';
-import { Plates, PlatesContext } from '../providers/PlatesContext'
+import { Plates, PlatesProvider } from '../providers/PlatesContext'
 import styles from '../styles/Home.module.css'
+import {api} from '../services/api';
+import { AllPlates } from '../components/AllPlates';
+import Swal from 'sweetalert2';
 
+interface HomeProps{
+  plates: Plates[] | null;
+}
 
-export default function Home() {
-  const { isOpenModal } = useContext(PlatesContext);
-  const card = {
-    imagem: '/Ao-Molho.png',
-    titulo: 'Ao Molho',
-    descricao: 'Macarrão ao molho branco, fughi e cheiro verde das montanhas.',
-    preco: '19,99',
-    isAvaliable: true,
-  } as Plates;
+export default function Home({plates}: HomeProps ) {
+  useEffect(() => {
+    Swal.fire('Deu erro!');
+    console.log(plates);
+  }, []);
 
   return (
-    <div className={styles.container}>
-      {isOpenModal && (<Modal/>)}
-      <Header/>
-      <main className={styles.main}>
-        <div style={{width: '30%'}}> 
-          <Card data={card}/>
-        </div>
-        <div style={{width: '30%'}}> 
-          <Card data={card}/>
-        </div>
-        <div style={{width: '30%'}}> 
-          <Card data={card}/>
-        </div>
-        <div style={{width: '30%'}}> 
-          <Card data={card}/>
-        </div>
-        <div style={{width: '30%'}}> 
-          <Card data={card}/>
-        </div>
-        <div style={{width: '30%'}}> 
-          <Card data={card}/>
-        </div>
-      </main>
-    </div>
+    <PlatesProvider platesApi={plates}>
+      <div className={styles.container}>
+        <Modal/>
+        <Header/>
+        <main className={styles.main}>
+          <AllPlates/>
+        </main>
+      </div>
+    </PlatesProvider>
   )
+}
+
+export const getStaticProps : GetStaticProps = async () => {
+  const plates = await api.get('/api')
+  .then(res => res.data as Plates[])
+  .catch(() => null);
+
+  return {
+    props: {
+      plates
+    }
+  }
 }
