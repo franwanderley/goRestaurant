@@ -13,15 +13,15 @@ interface HomeProps{
 }
 
 export default function Home({plates}: HomeProps ) {
+  
   useEffect(() => {
-    Swal.fire('Deu erro!');
-    console.log(plates);
+    if(!plates)
+      Swal.fire('Deu erro!');
   }, []);
 
   return (
     <PlatesProvider platesApi={plates}>
       <div className={styles.container}>
-        <Modal/>
         <Header/>
         <main className={styles.main}>
           <AllPlates/>
@@ -32,7 +32,7 @@ export default function Home({plates}: HomeProps ) {
 }
 
 export const getStaticProps : GetStaticProps = async () => {
-  const plates = await api.get('/api')
+  const plates = await api.get('plates')
   .then(res => res.data as Plates[])
   .catch(() => null);
 

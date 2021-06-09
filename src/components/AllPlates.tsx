@@ -5,11 +5,10 @@ import { Card } from "./Card";
 
 export function AllPlates(){
    const {plates} = useContext(PlatesContext);
-   console.log(plates);
    if(plates !== [])
       return (
          <>
-            { plates.map(p => (
+            { plates?.map(p => (
                <div key={p?._id} className={styles.card}> 
                <Card data={p}/> 
                </div>

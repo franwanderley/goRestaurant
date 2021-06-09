@@ -6,38 +6,45 @@ import styles from '../styles/modal.module.css';
 
 export function Modal(){
    const {
-      closeModal, isOpenModal, plateEdit, changePlateEdit,editPlates, addPlates
+      closeModal, plateEdit, changePlateEdit,editPlates, addPlates
    } = useContext(PlatesContext);
-   const [imagem, setImagem] = useState(plateEdit?.image || '');
-   const [nome, setNome] = useState(plateEdit?.title || '');
-   const [preco, setPreco] = useState<number>(plateEdit && Number(plateEdit.price));
-   const [descricao, setDescricao] = useState(plateEdit?.description || '');
+
+   const [image, setImage] = useState(plateEdit?.image);
+   const [title, setTitle] = useState(plateEdit?.title);
+   const [price, setPrice] = useState<number>(Number(plateEdit?.price));
+   const [description, setDescription] = useState(plateEdit?.description);
 
    function handleSubmit(form : FormEvent){
       form.preventDefault();
       closeModal();
-      changePlateEdit(undefined);
+      changePlateEdit(null);
       const plate = {
-         image: imagem,
-         title: nome,
-         price: preco.toLocaleString(), 
-         description: descricao, 
+         image,
+         title,
+         price: price.toLocaleString(),
+         description, 
          isAvaliable: true
       } as Plates;
-      if(plateEdit){
-         editPlates(plate);
-         Swal.fire('Plato Editado com Sucesso', '', 'success');
-      }else{
-         addPlates(plate);
-         Swal.fire('Plato Salvo com Sucesso', '', 'success');
+      try{
+         if(plateEdit){
+            plate._id = plateEdit._id;
+            editPlates(plate);
+            Swal.fire('Plato Editado com Sucesso', '', 'success');
+         }else{
+            addPlates(plate);
+            Swal.fire('Plato Salvo com Sucesso', '', 'success');
+         }
+      }catch(err){
+         console.log(err);
+         Swal.fire('Não foi possivel salvar este Plato', '', 'error');
       }
    }
 
    function handleCloseModal(){
       closeModal();
-      changePlateEdit(undefined);
+      changePlateEdit(null);
    }
-   if(isOpenModal) return (
+   return (
       <div className={styles.overlay}>
          <div className={styles.container}>
             <button
@@ -53,19 +60,19 @@ export function Modal(){
                   <input 
                      type="text" id="uri"
                      required
-                     value={imagem} 
+                     value={image} 
                      placeholder="Cole o link aqui"
-                     onChange={e => setImagem(e.target.value)}
+                     onChange={e => setImage(e.target.value)}
                   />
                   <div className={styles.juntos}>
                      <div className={styles.divnome}>
                         <label htmlFor="nome">Nome do Prato</label>
                         <input 
                            type="text" id="nome"
-                           value={nome} 
+                           value={title} 
                            required 
                            placeholder="Ex: Moda Italiana"
-                           onChange={e => setNome(e.target.value)}
+                           onChange={e => setTitle(e.target.value)}
                         />
                      </div>
                      <div className={styles.divpreco}>
@@ -73,18 +80,18 @@ export function Modal(){
                         <input 
                            type="number"
                            required
-                           value={preco} 
+                           value={price} 
                            id="preco"
-                           onChange={e => setPreco(Number(e.target.value))}
+                           onChange={e => setPrice(Number(e.target.value))}
                            />
                      </div>
                   </div>
                   <label htmlFor="descricao">Descrição</label>
                   <textarea 
                      className={styles.descricao}
-                     value={descricao}
+                     value={description}
                      required id="descricao" 
-                     onChange={e => setDescricao(e.target.value)}
+                     onChange={e => setDescription(e.target.value)}
                   />
                   <button type="submit">
                      <div className={styles.textbutton}>
@@ -98,8 +105,5 @@ export function Modal(){
             </form>
          </div>
       </div>
-   );
-   else return (
-      <div style={{display: 'none'}}></div>
    );
 }
