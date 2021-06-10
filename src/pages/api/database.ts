@@ -1,4 +1,3 @@
-import {MongoClient} from 'mongodb';
 import mongoose from 'mongoose';
 const connect = process.env.REACT_APP_MONGODB;
 
