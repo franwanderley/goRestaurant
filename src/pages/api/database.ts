@@ -1,8 +1,6 @@
 import {MongoClient} from 'mongodb';
 import mongoose from 'mongoose';
-const connect = 
-   'mongodb+srv://root:sobral123@cluster0.czuzh.mongodb.net/gorestaurant?retryWrites=true&w=majority'
-;
+const connect = process.env.REACT_APP_MONGODB;
 
 mongoose.connect(connect,{
    useNewUrlParser: true,
