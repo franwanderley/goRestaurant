@@ -6,7 +6,7 @@
    <p>
       um site para cadastrar comidas italianas para o cliente comprar no aplicativo <a>GoRestaurant</a>
    </p>
-   <img src="./public/resultado.jpg" alt="Resultado da Aplicação">
+   <img src="./public/resultado.jpg.jpg" alt="Resultado da Aplicação">
    <h3>🚀 Tecnologias Usadas</h3>
    <ul>
       <li>React</li>
