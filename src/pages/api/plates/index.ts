@@ -6,6 +6,8 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
    try{
       switch(req.method){
          case 'GET': {
+            console.log('GET Plates'); 
+            
             const data = await Plates.find();
             return res.json(data);
          };

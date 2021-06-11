@@ -9,6 +9,7 @@ export interface Plates{
    description: string;
    price: string;
    isAvaliable: boolean;
+   category: string[];
  }
 
  interface PlatesContextData{
@@ -47,7 +48,7 @@ export function PlatesProvider({ children, platesApi} : PlatesProviderProps) {
     //Salvar no banco de dados
     await api({
       method: "POST",
-      url: "plates",
+      url: "api/plates",
       data: plate,
     })
     .then(res => res.data)
@@ -71,7 +72,7 @@ export function PlatesProvider({ children, platesApi} : PlatesProviderProps) {
      
     await api({
       method: 'PUT',
-      url: `plates/${plate._id}`,
+      url: `api/plates/${plate._id}`,
       data: plate
     })
     .then(res => res.data)
@@ -91,7 +92,7 @@ export function PlatesProvider({ children, platesApi} : PlatesProviderProps) {
   async function deletePlates(plate: Plates){
     const idDelete = await api({
       method: 'DELETE',
-      url: `plates/${plate._id}`
+      url: `api/plates/${plate._id}`
     })
     .then(res => res.data)
     .catch(err => {

@@ -23,6 +23,9 @@ const PlateSchema = new Schema({
           type: Boolean,
           default: true,
        },
+       category: {
+         type: [String]
+       },
     });
     PlateSchema.path('_id');
 

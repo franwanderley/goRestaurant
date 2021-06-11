@@ -11,7 +11,8 @@ export function Modal(){
 
    const [image, setImage] = useState(plateEdit?.image);
    const [title, setTitle] = useState(plateEdit?.title);
-   const [price, setPrice] = useState<number>(Number(plateEdit?.price));
+   const [selectedCategory, setSelectedCategory] = useState<string[]>(plateEdit?.category || []);
+   const [price, setPrice] = useState<number>(Number(plateEdit?.price) || 0);
    const [description, setDescription] = useState(plateEdit?.description);
 
    function handleSubmit(form : FormEvent){
@@ -23,7 +24,8 @@ export function Modal(){
          title,
          price: price.toLocaleString(),
          description, 
-         isAvaliable: true
+         isAvaliable: true,
+         category: selectedCategory
       } as Plates;
       try{
          if(plateEdit){
@@ -39,11 +41,29 @@ export function Modal(){
          Swal.fire('Não foi possivel salvar este Plato', '', 'error');
       }
    }
+   
+   function addCategory(category: string){
+      //apagar
+      if(selectedCategory.includes(category)){
+         setSelectedCategory(
+            selectedCategory.filter(p => p !== category)
+         );
+      }
+      else{
+         //adicionar
+         setSelectedCategory([
+            ...selectedCategory,
+            category
+         ]);
+      }
+      console.table(selectedCategory);
+   }
 
    function handleCloseModal(){
       closeModal();
       changePlateEdit(null);
    }
+
    return (
       <div className={styles.overlay}>
          <div className={styles.container}>
@@ -93,6 +113,38 @@ export function Modal(){
                      required id="descricao" 
                      onChange={e => setDescription(e.target.value)}
                   />
+                  <div className={styles.boxCategory}>
+                     <div  
+                        onClick={() => addCategory('Massas')} 
+                        className={`
+                           ${styles.category} 
+                           ${selectedCategory.find(s => s === 'Massas') && styles.categorySelected }
+                        `} 
+                     >
+                        <img src="./icon/spaguetti.svg" alt="massas" color="#C72828"/>
+                        <p>Massas</p>
+                     </div>
+                     <div 
+                        onClick={() => addCategory('Pizza')} 
+                        className={`
+                           ${styles.category} 
+                           ${selectedCategory.find(s => s === 'Pizza') && styles.categorySelected }
+                        `}                        
+                     >
+                        <img src="./icon/pizza.svg" alt="pizza" color="#C72828"/>
+                        <p>Pizza</p>
+                     </div>
+                     <div
+                        onClick={() => addCategory('Carnes')} 
+                        className={`
+                           ${styles.category} 
+                           ${selectedCategory.find(s => s === 'Carnes') && styles.categorySelected }
+                        `}                        
+                     >
+                        <img src="./icon/beef.svg" alt="carne" color="#C72828"/>
+                        <p>Carnes</p>
+                     </div>
+                  </div>
                   <button type="submit">
                      <div className={styles.textbutton}>
                         Adicionar Prato

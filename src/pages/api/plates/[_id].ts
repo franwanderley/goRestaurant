@@ -16,6 +16,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
             return res.json(data);
          };
          case 'PUT': {
+            console.log('PUT');
             const data = req.body;
             const result = await Plates.updateOne({_id : _id}, data);
             
