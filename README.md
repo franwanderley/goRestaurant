@@ -23,6 +23,7 @@
       <li><code>cd 'sua pasta'</code></li>
       <li><code>code .</code> para abrir no VSCode</li>
       <li><code>npm install</code></li>
+      <li>Criar o .env com REACT_APP_SERVER=https://gorestaurant-xi.vercel.app/api</li>
       <li>Depois da Instalação roda  <code>npm start</code></li>
       <li>Depois disso acesse http://localhost:3000</li>
       <li>Ou você pode apenas acessar-lo <a href="https://gorestaurant-xi.vercel.app/">neste link</a></li>
